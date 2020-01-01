@@ -1,83 +1,613 @@
-project "SFML"
+group "SFML"
+
+project "sfml-audio"
 
 	kind "StaticLib"
+	language "C++"
 
-	language "C"
-
-
+    location "build/projects"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 
-
 	files
-
 	{
-		"include/SFML/Audio.hpp",
-		"include/SFML/Config.hpp",
-        "include/SFML/GpuPreference.hpp",
-        "include/SFML/Graphics.hpp",
-        "include/SFML/Main.hpp",
-        "include/SFML/Network.hpp",
-        "include/SFML/OpenGL.hpp",
-        "include/SFML/System.hpp",
-        "include/SFML/Window.hpp"
-	}
+        "include/SFML/Audio/*.h", 
+        "src/SFML/Audio/*.cpp" 
+    }
+    
+    includedirs 
+    {
+        "include", 
+        "src", 
+        "extlibs/headers/AL",
+        "extlibs/headers" 
+    }
 
-	filter "system:linux"
+    defines 
+    {
+        "SFML_STATIC"
+    }
 
-		pic "On"
+    filter "configurations:Debug"
 
+        targetname ("sfml-audio-s-d")
+        
+        symbols "on"
+        
+        defines 
+        { 
+            "DEBUG=1", 
+            "_DEBUG=1" 
+        }
+
+
+    filter "configurations:Release"
+
+        targetname ("sfml-audio-s")
+
+        optimize "on"
+
+        defines 
+        { 
+            "NDEBUG" 
+        }
+        
+        
+    filter "system:windows"
+        
 		systemversion "latest"
-
 		staticruntime "On"
-
-
-
-		files
-
-		{
-		}
-
-
-
-		defines
-
-		{
-		}
-
-
-	filter "system:windows"
-
-		systemversion "latest"
-
-		staticruntime "On"
-
+        
+        
 		files
 		{
-		}
 
-
-
+        }
+        
+        includedirs 
+        { 
+            "extlibs/headers/libsndfile/windows" 
+        }
+        
 		defines 
-
 		{ 
-		}
+            "WIN32", 
+            "_WIN32"
+        }
+        
+
+    filter "system:macos"
+
+        includedirs 
+        { 
+            "extlibs/headers/libsndfile/osx" 
+        }
+
+        defines 
+        { 
+            "MACOSX" 
+        }
+        
+
+    filter "system:linux"
+        
+        systemversion "latest"
+        staticruntime "On"
+
+        files
+        {
+
+        }
+
+        defines
+        {
+            "LINUX" 
+        }
+
+--==========SFML Graphics==========--
+
+project "sfml-graphics"
+
+    kind "StaticLib"
+    language "C++"
+
+    location "build/projects"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+    files
+    {
+        "src/SFML/Graphics/*.cpp" 
+    }
+
+    includedirs 
+    { 
+        "include", 
+        "src", 
+        "extlibs/headers/stb_image", 
+        "extlibs/headers/glad/include", 
+        "extlibs/headers/freetype2"  
+    }
+
+    defines 
+    {
+        "SFML_STATIC",
+        "GLEW_STATIC", 
+        "STBI_FAILURE_USERMSG" 
+    }
+
+    filter "configurations:Debug"
+
+        targetname ("sfml-graphics-s-d")
+        
+        symbols "on"
+        
+        defines 
+        { 
+            "DEBUG=1", 
+            "_DEBUG=1" 
+        }
+
+
+    filter "configurations:Release"
+
+        targetname ("sfml-graphics-s")
+
+        optimize "on"
+
+        defines 
+        { 
+            "NDEBUG" 
+        }
+        
+        
+    filter "system:windows"
+        
+        systemversion "latest"
+        staticruntime "On"
+        
+        
+        files
+        {
+            
+        }
+
+        includedirs 
+        { 
+            "extlibs/headers/libfreetype/windows" 
+        }
+        
+        defines 
+        { 
+            "WIN32", 
+            "_WIN32",
+            "_CRT_SECURE_NO_WARNINGS" 
+        }
+        
+
+    filter "system:macos"
+
+        includedirs 
+        { 
+            "extlibs/headers/libfreetype/osx" 
+        }
+
+        defines 
+        { 
+            "MACOSX" 
+        }
+        
+
+    filter "system:linux"
+        
+        systemversion "latest"
+        staticruntime "On"
+
+        files
+        {
+
+        }
+
+        defines
+        {
+            "LINUX" 
+        }
+
+--==========SFML Network==========--
+
+project "sfml-network"
+
+    kind "StaticLib"
+    language "C++"
+
+    location "build/projects"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+    files
+    {
+        "src/SFML/Network/*.cpp" 
+    }
+
+    includedirs 
+    { 
+        "include", 
+        "src" 
+    }
+
+    defines 
+    {
+        "SFML_STATIC"
+    }
+
+    filter "configurations:Debug"
+
+        targetname ("sfml-network-s-d")
+        
+        symbols "on"
+        
+        defines 
+        { 
+            "DEBUG=1", 
+            "_DEBUG=1" 
+        }
+
+
+    filter "configurations:Release"
+
+        targetname ("sfml-network-s")
+
+        optimize "on"
+
+        defines 
+        { 
+            "NDEBUG" 
+        }
+        
+        
+    filter "system:windows"
+        
+        systemversion "latest"
+        staticruntime "On"
+        
+        
+        files
+        {
+            "src/SFML/Network/Win32/*.cpp" 
+        }
+        
+        defines 
+        { 
+            "WIN32", 
+            "_WIN32"
+        }
+        
+
+    filter "system:macos"
+
+        files
+        {
+            "src/SFML/Network/Unix/*.cpp" 
+        }
+
+        defines 
+        { 
+            "MACOSX" 
+        }
+        
+
+    filter "system:linux"
+        
+        systemversion "latest"
+        staticruntime "On"
+
+        files
+        {
+            "src/SFML/Network/Unix/*.cpp" 
+        }
+
+        defines
+        {
+            "LINUX" 
+        }
+
+--==========SFML System==========--
+
+project "sfml-system"
+
+    kind "StaticLib"
+    language "C++"
+
+    location "build/projects"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+    files
+    {
+        "src/SFML/System/*.cpp" 
+    }
+
+    includedirs 
+    { 
+        "include", 
+        "src" 
+    }
+
+    defines 
+    {
+        "SFML_STATIC"
+    }
+
+    filter "configurations:Debug"
+
+        targetname ("sfml-system-s-d")
+        
+        symbols "on"
+        
+        defines 
+        { 
+            "DEBUG=1", 
+            "_DEBUG=1" 
+        }
+
+
+    filter "configurations:Release"
+
+        targetname ("sfml-system-s")
+
+        optimize "on"
+
+        defines 
+        { 
+            "NDEBUG" 
+        }
+        
+        
+    filter "system:windows"
+        
+        systemversion "latest"
+        staticruntime "On"
+        
+        
+        files
+        {
+            "src/SFML/System/Win32/*.cpp" 
+        }
+        
+        defines 
+        { 
+            "WIN32", 
+            "_WIN32"
+        }
+        
+
+    filter "system:macos"
+
+        files
+        {
+            "src/SFML/System/Unix/*.cpp" 
+        }
+
+        defines 
+        { 
+            "MACOSX" 
+        }
+        
+
+    filter "system:linux"
+        
+        systemversion "latest"
+        staticruntime "On"
+
+        files
+        {
+            "src/SFML/System/Unix/*.cpp" 
+        }
+
+        defines
+        {
+            "LINUX" 
+        }
+
+--==========SFML Window==========--
+
+project "sfml-window"
+
+    kind "StaticLib"
+    language "C++"
+
+    location "build/projects"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+
+    files
+    {
+        "src/SFML/Window/*.cpp" 
+    }
+
+    includedirs 
+    { 
+        "include", 
+        "src",
+        "extlibs/headers/vulkan",
+        "extlibs/headers/glad/include" 
+    }
+
+    defines 
+    {
+        "SFML_STATIC"
+    }
+
+    filter "configurations:Debug"
+
+        targetname ("sfml-window-s-d")
+        
+        symbols "on"
+        
+        defines 
+        { 
+            "DEBUG=1", 
+            "_DEBUG=1" 
+        }
+
+
+    filter "configurations:Release"
+
+        targetname ("sfml-window-s")
+
+        optimize "on"
+
+        defines 
+        { 
+            "NDEBUG" 
+        }
+        
+        
+    filter "system:windows"
+        
+        systemversion "latest"
+        staticruntime "On"
+        
+        
+        files
+        {
+            "src/SFML/Window/Win32/*.cpp"
+        }
+        
+        defines 
+        { 
+            "WIN32", 
+            "_WIN32"
+        }
+        
+
+    filter "system:macos"
+
+        files
+        {
+            "src/SFML/Window/OSX/*.cpp"
+        }
+
+        defines 
+        { 
+            "MACOSX" 
+        }
+        
+
+    filter "system:linux"
+        
+        systemversion "latest"
+        staticruntime "On"
+
+        files
+        {
+            "src/SFML/Window/Linux/*.cpp" 
+        }
+
+        defines
+        {
+            "LINUX" 
+        }
+        
+--==========SFML Main==========--
+        
 
 
 
-	filter "configurations:Debug"
+project "sfml-main"
 
-		runtime "Debug"
+    location "build/projects"
+    language "C++"
+    kind "StaticLib"
 
-		symbols "on"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    --source files depend on target machine
+    --files { "src/SFML/Main/*.cpp" }
+
+    includedirs 
+    { 
+        "include", 
+        "src" 
+    }
+
+
+    filter "configurations:Debug"
+
+        defines 
+        { 
+            "DEBUG=1", 
+            "_DEBUG=1" 
+        }
+
+        flags 
+        { 
+            "Symbols" 
+        }
+
+        targetname "sfml-main-d"
+
+
+    filter "configurations:Release"
+
+        defines 
+        { 
+            "NDEBUG" 
+        }
+
+        flags 
+        { 
+            "Optimize" 
+        }
+
+        targetname "sfml-main"
 
 
 
-	filter "configurations:Release"
+    filter "system:windows"
 
-		runtime "Release"
+        files
+        {
+            "src/SFML/Main/MainWin32.cpp"
+        }
 
-		optimize "on"
+        defines 
+        { 
+            "WIN32", 
+            "_WIN32" 
+        }
+
+
+
+    filter "system:macos"
+
+        files
+        {
+            "src/SFML/Main/MainiOS.mm"
+        }
+
+        defines { "MACOSX" }
+
+
+
+    filter "system:linux"
+
+        files
+        {
+            "src/SFML/Main/MainWin32.cpp"
+        }
+
+        defines { "LINUX" }
+
+group ""
