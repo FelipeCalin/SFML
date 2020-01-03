@@ -7,8 +7,8 @@ project "sfml-audio"
 
     location "build/projects"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/" )
+	objdir ("bin-int/" .. outputdir .. "/" )
 
 
 	files
@@ -23,6 +23,22 @@ project "sfml-audio"
         "src", 
         "extlibs/headers/AL",
         "extlibs/headers" 
+    }
+
+    libdirs 
+    { 
+         "extlibs/libs-msvc-universal/x64"
+    }
+
+    links 
+    { 
+        "sfml-system",
+        "openal32",
+        "flac",
+        "vorbisenc",
+        "vorbisfile",
+        "vorbis",
+        "ogg"
     }
 
     defines 
@@ -115,8 +131,8 @@ project "sfml-graphics"
 
     location "build/projects"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/" )
+	objdir ("bin-int/" .. outputdir .. "/" )
 
 
     files
@@ -131,6 +147,19 @@ project "sfml-graphics"
         "extlibs/headers/stb_image", 
         "extlibs/headers/glad/include", 
         "extlibs/headers/freetype2"  
+    }
+
+    libdirs 
+    { 
+         "extlibs/libs-msvc-universal/x64"
+    }
+
+    links 
+    { 
+        "sfml-window",
+        "sfml-system",
+        "opengl32",
+        "freetype"
     }
 
     defines 
@@ -226,8 +255,8 @@ project "sfml-network"
 
     location "build/projects"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/" )
+	objdir ("bin-int/" .. outputdir .. "/" )
 
 
     files
@@ -239,6 +268,17 @@ project "sfml-network"
     { 
         "include", 
         "src" 
+    }
+
+    libdirs 
+    { 
+         "extlibs/libs-msvc-universal/x64"
+    }
+
+    links 
+    { 
+        "sfml-system",
+        "ws2_32"
     }
 
     defines 
@@ -326,8 +366,8 @@ project "sfml-system"
 
     location "build/projects"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/" )
+	objdir ("bin-int/" .. outputdir .. "/" )
 
 
     files
@@ -339,6 +379,16 @@ project "sfml-system"
     { 
         "include", 
         "src" 
+    }
+
+    libdirs 
+    { 
+         "extlibs/libs-msvc-universal/x64"
+    }
+
+    links 
+    { 
+        "winmm"
     }
 
     defines 
@@ -426,8 +476,8 @@ project "sfml-window"
 
     location "build/projects"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/" )
+	objdir ("bin-int/" .. outputdir .. "/" )
 
 
     files
@@ -441,6 +491,19 @@ project "sfml-window"
         "src",
         "extlibs/headers/vulkan",
         "extlibs/headers/glad/include" 
+    }
+
+    libdirs 
+    { 
+         "extlibs/libs-msvc-universal/x64"
+    }
+
+    links 
+    { 
+        "sfml-system",
+        "opengl32",
+        "winmm",
+        "gdi32"
     }
 
     defines 
@@ -530,8 +593,8 @@ project "sfml-main"
     language "C++"
     kind "StaticLib"
 
-    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    targetdir ("bin/" .. outputdir .. "/" )
+	objdir ("bin-int/" .. outputdir .. "/" )
 
     --source files depend on target machine
     --files { "src/SFML/Main/*.cpp" }

@@ -54,20 +54,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\bin\Debug-windows-x86_64\sfml-network\</OutDir>
-    <IntDir>..\..\bin-int\Debug-windows-x86_64\sfml-network\</IntDir>
+    <OutDir>..\..\bin\Debug-windows-x86_64\</OutDir>
+    <IntDir>..\..\bin-int\Debug-windows-x86_64\Debug\sfml-network\</IntDir>
     <TargetName>sfml-network-s-d</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\bin\Release-windows-x86_64\sfml-network\</OutDir>
-    <IntDir>..\..\bin-int\Release-windows-x86_64\sfml-network\</IntDir>
+    <OutDir>..\..\bin\Release-windows-x86_64\</OutDir>
+    <IntDir>..\..\bin-int\Release-windows-x86_64\Release\sfml-network\</IntDir>
     <TargetName>sfml-network-s</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <OutDir>..\..\bin\Dist-windows-x86_64\sfml-network\</OutDir>
-    <IntDir>..\..\bin-int\Dist-windows-x86_64\sfml-network\</IntDir>
+    <OutDir>..\..\bin\Dist-windows-x86_64\</OutDir>
+    <IntDir>..\..\bin-int\Dist-windows-x86_64\Dist\sfml-network\</IntDir>
     <TargetName>sfml-network</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -85,6 +85,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\extlibs\libs-msvc-universal\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -104,6 +108,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\extlibs\libs-msvc-universal\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
@@ -117,6 +125,10 @@
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <Lib>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\extlibs\libs-msvc-universal\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\SFML\Network\Ftp.cpp" />
@@ -129,6 +141,11 @@
     <ClCompile Include="..\..\src\SFML\Network\TcpSocket.cpp" />
     <ClCompile Include="..\..\src\SFML\Network\UdpSocket.cpp" />
     <ClCompile Include="..\..\src\SFML\Network\Win32\SocketImpl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="sfml-system.vcxproj">
+      <Project>{49811352-B536-8C47-3E2B-861EAADF824B}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
