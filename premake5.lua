@@ -2,7 +2,7 @@ group "SFML"
 
 project "sfml-audio"
 
-	kind "StaticLib"
+    kind "StaticLib"
 	language "C++"
 
     location "build/projects"
@@ -27,7 +27,7 @@ project "sfml-audio"
 
     libdirs 
     { 
-         "extlibs/libs-msvc-universal/x64"
+        "extlibs/libs-msvc-universal/x64"
     }
 
     links 
@@ -49,7 +49,7 @@ project "sfml-audio"
     filter "configurations:Debug"
 
         targetname ("sfml-audio-s-d")
-        
+        buildoptions "/MDd"
         symbols "on"
         
         defines 
@@ -62,7 +62,19 @@ project "sfml-audio"
     filter "configurations:Release"
 
         targetname ("sfml-audio-s")
+        buildoptions "/MD"
+        optimize "on"
 
+        defines 
+        { 
+            "NDEBUG" 
+        }
+    
+
+    filter "configurations:Dist"
+
+        targetname ("sfml-audio-s")
+        buildoptions "/MD"
         optimize "on"
 
         defines 
@@ -151,7 +163,7 @@ project "sfml-graphics"
 
     libdirs 
     { 
-         "extlibs/libs-msvc-universal/x64"
+        "extlibs/libs-msvc-universal/x64"
     }
 
     links 
@@ -172,7 +184,7 @@ project "sfml-graphics"
     filter "configurations:Debug"
 
         targetname ("sfml-graphics-s-d")
-        
+        buildoptions "/MDd"
         symbols "on"
         
         defines 
@@ -185,7 +197,19 @@ project "sfml-graphics"
     filter "configurations:Release"
 
         targetname ("sfml-graphics-s")
+        buildoptions "/MD"
+        optimize "on"
 
+        defines 
+        { 
+            "NDEBUG" 
+        }
+    
+
+    filter "configurations:Dist"
+
+        targetname ("sfml-audio-s")
+        buildoptions "/MD"
         optimize "on"
 
         defines 
@@ -272,7 +296,7 @@ project "sfml-network"
 
     libdirs 
     { 
-         "extlibs/libs-msvc-universal/x64"
+        "extlibs/libs-msvc-universal/x64"
     }
 
     links 
@@ -289,7 +313,7 @@ project "sfml-network"
     filter "configurations:Debug"
 
         targetname ("sfml-network-s-d")
-        
+        buildoptions "/MDd"
         symbols "on"
         
         defines 
@@ -302,7 +326,19 @@ project "sfml-network"
     filter "configurations:Release"
 
         targetname ("sfml-network-s")
+        buildoptions "/MD"
+        optimize "on"
 
+        defines 
+        { 
+            "NDEBUG" 
+        }
+
+
+    filter "configurations:Dist"
+
+        targetname ("sfml-audio-s")
+        buildoptions "/MD"
         optimize "on"
 
         defines 
@@ -383,7 +419,7 @@ project "sfml-system"
 
     libdirs 
     { 
-         "extlibs/libs-msvc-universal/x64"
+        "extlibs/libs-msvc-universal/x64"
     }
 
     links 
@@ -399,7 +435,7 @@ project "sfml-system"
     filter "configurations:Debug"
 
         targetname ("sfml-system-s-d")
-        
+        buildoptions "/MDd"
         symbols "on"
         
         defines 
@@ -412,7 +448,19 @@ project "sfml-system"
     filter "configurations:Release"
 
         targetname ("sfml-system-s")
+        buildoptions "/MD"
+        optimize "on"
 
+        defines 
+        { 
+            "NDEBUG" 
+        }
+
+
+    filter "configurations:Dist"
+
+        targetname ("sfml-audio-s")
+        buildoptions "/MD"
         optimize "on"
 
         defines 
@@ -495,7 +543,7 @@ project "sfml-window"
 
     libdirs 
     { 
-         "extlibs/libs-msvc-universal/x64"
+        "extlibs/libs-msvc-universal/x64"
     }
 
     links 
@@ -514,7 +562,7 @@ project "sfml-window"
     filter "configurations:Debug"
 
         targetname ("sfml-window-s-d")
-        
+        buildoptions "/MDd"
         symbols "on"
         
         defines 
@@ -527,7 +575,19 @@ project "sfml-window"
     filter "configurations:Release"
 
         targetname ("sfml-window-s")
+        buildoptions "/MD"
+        optimize "on"
 
+        defines 
+        { 
+            "NDEBUG" 
+        }
+
+
+    filter "configurations:Dist"
+
+        targetname ("sfml-audio-s")
+        buildoptions "/MD"
         optimize "on"
 
         defines 
@@ -608,6 +668,10 @@ project "sfml-main"
 
     filter "configurations:Debug"
 
+        targetname "sfml-main-d"
+
+        buildoptions "/MDd"
+    
         defines 
         { 
             "DEBUG=1", 
@@ -619,10 +683,13 @@ project "sfml-main"
             "Symbols" 
         }
 
-        targetname "sfml-main-d"
 
 
     filter "configurations:Release"
+
+        targetname "sfml-main"
+
+        buildoptions "/MD"
 
         defines 
         { 
@@ -634,7 +701,23 @@ project "sfml-main"
             "Optimize" 
         }
 
+
+
+    filter "configurations:Release"
+
         targetname "sfml-main"
+
+        buildoptions "/MD"
+
+        defines 
+        { 
+            "NDEBUG" 
+        }
+
+        flags 
+        { 
+            "Optimize" 
+        }
 
 
 
