@@ -32,6 +32,7 @@ project "sfml-audio"
 
     links 
     { 
+        "opengl32.lib",
         "sfml-system",
         "openal32",
         "flac",
